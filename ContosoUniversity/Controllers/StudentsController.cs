@@ -20,6 +20,7 @@ namespace ContosoUniversity.Controllers
         }
 
         // GET: Students
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.Students.ToListAsync());
@@ -34,6 +35,9 @@ namespace ContosoUniversity.Controllers
             }
 
             var student = await _context.Students
+                .Include(s => s.Enrollments)
+                .ThenInclude(e => e.Course)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (student == null)
             {
