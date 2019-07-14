@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ContosoUniversity.Models
 {
-    public class Student
+    public class Enrollments
     {
     }
 }
