@@ -34,17 +34,20 @@ namespace ContosoUniversity.Controllers
             }
 
             var student = await _context.Students
+                .Include(s => s.Enrollments)
+                    .ThenInclude(e => e.Course)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
+
             if (student == null)
             {
                 return NotFound();
             }
-
             return View(student);
         }
-
-        // GET: Students/Create
-        public IActionResult Create()
+     
+            // GET: Students/Create
+            public IActionResult Create()
         {
             return View();
         }
